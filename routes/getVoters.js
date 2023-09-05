@@ -7,7 +7,7 @@ router.get("/", async function (req, res, next) {
   try {
     res.json(await voters.getMultiple(req.query.page));
   } catch (err) {
-    console.error(`Error while getting programming languages `, err.message);
+    console.error(`Error while getting Voters `, err.message);
     next(err);
   }
 });
@@ -17,7 +17,7 @@ router.post("/", async function (req, res, next) {
   try {
     res.json(await voters.create(req.body));
   } catch (err) {
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while creating Voters`, err.message);
     next(err);
   }
 });
@@ -27,7 +27,7 @@ router.put("/:id", async function (req, res, next) {
   try {
     res.json(await voters.update(req.params.id, req.body));
   } catch (err) {
-    console.error(`Error while updating programming language`, err.message);
+    console.error(`Error while updating Voters`, err.message);
     next(err);
   }
 });
