@@ -5,15 +5,17 @@ const config = require("../config");
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   
+  console.log('select data');
+  
   const rows = await db.query(
     `SELECT CountyID, StateID, Status, County, Precinct, First, Last, Middle, Phone, email, BirthDate, RegDate, Party,
       StreetNo, StreetName, Address1, City, State, Zip, RegisteredDays, Age, TotalVotes, Generals, Primaries, Polls, 
       Absentee, Early, Provisional, LikelytoVote, Score
-      FROM voters202204 WHERE NOT County = 'Clark' LIMIT ${offset},${config.listPerPage}`
+      FROM nvvoters2204 WHERE NOT County = 'Clark' LIMIT ${offset},${config.listPerPage}`
 
   );
-  //      FROM voters202204 WHERE NOT County = 'Clark' LIMIT ${offset},${config.listPerPage}`
-  //      FROM voters202204 LIMIT ${offset},${config.listPerPage}`
+  //      FROM nvvoters2204 WHERE NOT County = 'Clark' LIMIT ${offset},${config.listPerPage}`
+  //      FROM nvvoters2204 LIMIT ${offset},${config.listPerPage}`
 
 
   const data = helper.emptyOrRows(rows);
@@ -27,7 +29,7 @@ async function getMultiple(page = 1) {
 
 async function create(voter) {
   const result = await db.query(
-    `INSERT INTO voters202204 
+    `INSERT INTO nvvoters2204 
     (CountyID, StateID, Status, County, Precinct, First, Last, Middle) 
     VALUES 
     ("${voter.CountyID}", ${voter.StateID}, ${voter.status}, ${voter.County}, ${Precinct}, ${First}, ${Last}, ${Middle})`
@@ -45,7 +47,7 @@ async function create(voter) {
 
 async function update(id, voter) {
   const result = await db.query(
-    `UPDATE voters202204
+    `UPDATE nvvoters2204
     SET name="${voter.CountyID}",
     WHERE id=${id}`
   );
@@ -63,7 +65,7 @@ async function update(id, voter) {
 
 async function remove(id) {
   const result = await db.query(
-    `DELETE FROM voters202204 WHERE StateID=${id}`
+    `DELETE FROM nvvoters2204 WHERE StateID=${id}`
   );
 
   let message = "Error in deleting Voter";
