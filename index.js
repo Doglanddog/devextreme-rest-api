@@ -19,6 +19,9 @@ app.get("/", (req, res) => {
 
 app.use("/api/voters", getvotersRouter);
 
+
+console.log('=======> api/voters');
+
 /* Error handler middleware */
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
